@@ -3,7 +3,16 @@ pipeline {
   stages {
     stage('compile') {
       steps {
-        sh 'mvn compile'
+        parallel(
+          "compile": {
+            sh 'mvn compile'
+            
+          },
+          "": {
+            sleep 10
+            
+          }
+        )
       }
     }
   }
